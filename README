@@ -1,0 +1,3 @@
+.conf: {a, b} > show.cpp > ECHO
+INPUT: {seed} && .conf: {PRIME, MODULO} > && hashni.cpp > cat && echo && .actual
+
