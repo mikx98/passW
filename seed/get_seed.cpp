@@ -46,18 +46,25 @@
 
 using namespace std;
 
+int a, b;
+
+void getValues() {
+  FILE * f;
+  f = fopen(".conf", "r");
+
+  LL waste;
+  fscanf(f, "%lld %lld %d %d", &waste, &waste, &a, &b);
+
+  fclose(f);
+}
+
 int main() {
 
-  ios_base::sync_with_stdio(false);
+  LL seed; scanf("%lld", &seed);
 
-  string s; cin >> s;
-	cout << s << endl;
-  
-  LL seed, sth; int a, b; cin >> seed;
+  getValues();
 
-  s == "hash" && printf("%lld\n", hashni(seed));
-
-  s == "find" && cin >> sth && skusaj(a, b, sth);
+  printf("%d\n", a+(seed % (b-a)));
 
 	return 0;
 
