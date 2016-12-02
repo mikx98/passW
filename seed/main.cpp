@@ -47,6 +47,7 @@
 using namespace std;
 
 LL PRIME, MODULO;
+int a, b;
 
   //--- vrati a^b mod MODULO
 // LL power(LL a, LL b) {
@@ -90,7 +91,12 @@ int skusaj(int a, int b, LL sth) {
 }
 
 void getValues() {
+  FILE * f;
+  f = fopen(".conf", "r");
 
+  fscanf(f, "%lld %lld %d %d", &PRIME, &MODULO, &a, &b);
+
+  fclose(f);
 }
 
 int main() {
@@ -99,11 +105,11 @@ int main() {
 
   getValues();
 
-  string s; cin >> s;
+  string s; LL sth; cin >> s >> sth;
 
-  s == "hash" && printf("%lld\n", hashni(seed));
+  s == "hash" && printf("%lld\n", hashni(sth));
 
-  s == "find" && cin >> sth && skusaj(a, b, sth);
+  s == "find" && skusaj(a, b, sth);
 
 	return 0;
 
