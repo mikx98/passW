@@ -46,14 +46,13 @@
 
 using namespace std;
 
-int a, b;
+LL a, b;
 
 void getValues() {
   FILE * f;
   f = fopen(".conf", "r");
 
-  LL waste;
-  fscanf(f, "%lld %lld %d %d", &waste, &waste, &a, &b);
+  fscanf(f, "%lld %lld", &a, &b);
 
   fclose(f);
 }
@@ -64,7 +63,7 @@ int main() {
 
   getValues();
 
-  printf("%d\n", a+(seed % (b-a)));
+  printf("%lld\n", a+(seed % (b-a)));
 
 	return 0;
 

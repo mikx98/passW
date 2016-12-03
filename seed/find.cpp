@@ -48,8 +48,8 @@ using namespace std;
 
 int main() {
 
-	LL sth; cin >> sth;
-  cout << "find " << sth << endl;
+	LL sth, sth2; cin >> sth >> sth2;
+  cout << "find " << sth << " " << sth2 << endl;
 
 	return 0;
 

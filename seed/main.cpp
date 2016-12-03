@@ -46,46 +46,31 @@
 
 using namespace std;
 
-LL PRIME, MODULO;
+LL PRIME, MODULO, PRIME_2, MODULO_2;
 int a, b;
 
-  //--- vrati a^b mod MODULO
-// LL power(LL a, LL b) {
-//   LL ret = 1LL; LL moc = a;
-
-//   for(LL i=0LL; ((LL)(1LL << i)) <= b; i++) {
-//     if (b & ((LL)(1LL << i))) {
-//       ret *= moc;
-//       ret %= MODULO;
-//     }
-
-//     moc *= moc;
-//     moc %= MODULO;
-//   }
-
-//   return ret;
-// }
-
-LL hashni(LL seed) {
+LL hashni(LL seed, LL PR, LL MOD) {
   LL ret = 1LL;
   
-  LL mocn = 1LL;
+  LL mocn = PR;
   while (seed > 0LL) {
     LL wh = seed % 10LL;
     seed /= 10LL;
 
-    ret *= (wh * mocn) % MODULO;
-    ret %= MODULO;
+    ret += ((wh+1LL) * mocn) % MOD;
+    ret %= MOD;
 
-    mocn *= PRIME;
+    mocn *= PR;
+    mocn %= MOD;
   }
 
   return ret;
 }
 
-int skusaj(int a, int b, LL sth) {
-  For(i, a, b) 
-    hashni(i) == sth && cout << i << endl;
+int skusaj(int a, int b, LL sth, LL sth2) {
+  For(i, a, b)
+    hashni(i, PRIME, MODULO) == sth && 
+      hashni(i, PRIME_2, MODULO_2) == sth2 && cout << i << endl;
 
   return 0;
 }
@@ -94,7 +79,7 @@ void getValues() {
   FILE * f;
   f = fopen(".conf", "r");
 
-  fscanf(f, "%lld %lld %d %d", &PRIME, &MODULO, &a, &b);
+  fscanf(f, "%d %d %lld %lld %lld %lld", &a, &b, &PRIME, &MODULO, &PRIME_2, &MODULO_2);
 
   fclose(f);
 }
@@ -105,11 +90,11 @@ int main() {
 
   getValues();
 
-  string s; LL sth; cin >> s >> sth;
+  string s; LL sth, sth2; cin >> s >> sth;
 
-  s == "hash" && printf("%lld\n", hashni(sth));
+  s == "hash" && printf("%lld\n%lld\n", hashni(sth, PRIME, MODULO), hashni(sth, PRIME_2, MODULO_2));
 
-  s == "find" && skusaj(a, b, sth);
+  s == "find" && cin >> sth2 && skusaj(a, b, sth, sth2);
 
 	return 0;
 
