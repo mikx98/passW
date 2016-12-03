@@ -2,10 +2,18 @@
 
 make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
 
+cd seed ;
+
+clear ;
 echo 'Enter some random big number: ' ;
-./seed/get_seed > .secret ;
-main < .secret ;
 
-./seed/hash < .secret | ./seed/main > .actual ;
+./get_seed > .secret ;
 
-rm .secret main seed/main seed/find seed/get_seed ;
+echo 'Please change your password to this: ' ;
+./../main < .secret ;
+
+./hash < .secret | ./main > .actual ;
+
+cd .. ;
+
+rm seed/.secret main seed/main seed/find seed/get_seed seed/hash ;

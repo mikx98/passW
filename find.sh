@@ -4,6 +4,15 @@ make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/mai
 
 echo 'I am working ... please wait ...' ;
 
-./seed/find < .actual | ./seed/main ;
+cd seed ;
 
-rm main seed/main seed/find seed/get_seed ;
+./find < .actual | ./main > .temp ;
+
+while IFS= read -r poss
+do
+	../main <<< $poss
+done < .temp
+
+cd .. ;
+
+rm seed/.temp main seed/main seed/find seed/get_seed seed/hash ;
