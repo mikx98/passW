@@ -47,7 +47,7 @@
 using namespace std;
 
 LL PRIME, MODULO, PRIME_2, MODULO_2;
-int a, b;
+LL a, b;
 
 LL hashni(LL seed, LL PR, LL MOD) {
   LL ret = 1LL;
@@ -67,8 +67,8 @@ LL hashni(LL seed, LL PR, LL MOD) {
   return ret;
 }
 
-int skusaj(int a, int b, LL sth, LL sth2) {
-  For(i, a, b)
+int skusaj(LL a, LL b, LL sth, LL sth2) {
+  for (LL i = a; i < b ; ++i)
     hashni(i, PRIME, MODULO) == sth && 
       hashni(i, PRIME_2, MODULO_2) == sth2 && cout << i << endl;
 
@@ -79,7 +79,7 @@ void getValues() {
   FILE * f;
   f = fopen(".conf", "r");
 
-  fscanf(f, "%d %d %lld %lld %lld %lld", &a, &b, &PRIME, &MODULO, &PRIME_2, &MODULO_2);
+  fscanf(f, "%lld %lld %lld %lld %lld %lld", &a, &b, &PRIME, &MODULO, &PRIME_2, &MODULO_2);
 
   fclose(f);
 }
