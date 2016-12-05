@@ -1,12 +1,27 @@
 #!/bin/bash
 
+if [ "$1" = "" ] ; then
+  echo 'You NEED to specify a (unique) name of the pass to re-solve. Try run as ./find.sh name';
+
+  exit 1 ;
+fi
+
+if ! [ -f data/$1.pW ] || ! [ -f data/$1.conf ] ; then
+  echo 'It seems like the pass you want to re-solve has no or corrupted data.' ;
+
+  exit 1 ;
+fi
+
+cp seed/.conf seed/.conf.backup ;
+cp data/$1.conf seed/.conf ;
+
 make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
 
 echo 'I am working ... please wait ...' ;
 
 cd seed ;
 
-./find < .actual | ./main > .temp ;
+./find < ../data/$1.pW | ./main > .temp ;
 
 while IFS= read -r poss
 do
@@ -14,5 +29,7 @@ do
 done < .temp
 
 cd .. ;
+
+mv seed/.conf.backup seed/.conf ;
 
 rm seed/.temp main seed/main seed/find seed/get_seed seed/hash ;

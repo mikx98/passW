@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$1" = "" ] ; then
+  echo 'You NEED to specify a (unique) name of the pass. Try run as ./run.sh name';
+
+  exit 1 ;
+fi
+
 make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
 
 cd seed ;
@@ -9,10 +15,11 @@ echo 'Enter some random big number: ' ;
 
 ./get_seed > .secret ;
 
-echo 'Please change your password to this: ' ;
+echo 'Please change your password (' $1 ') to this: ' ;
 ./../main < .secret ;
 
-./hash < .secret | ./main > .actual ;
+./hash < .secret | ./main > ../data/$1.pW ;
+cp .conf ../data/$1.conf
 
 cd .. ;
 
