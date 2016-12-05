@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -d "data" ] ; then
+  mkdir data ;
+fi
+
 if [ "$1" = "" ] ; then
   echo 'You NEED to specify a (unique) name of the pass. Try run as ./run.sh name';
 
