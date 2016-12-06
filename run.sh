@@ -16,6 +16,8 @@ if [ "$1" = "" ] ; then
   exit 1 ;
 fi
 
+rm -f data/$1.solved ;
+
 touch seed/.corrupt ;
 
 make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main

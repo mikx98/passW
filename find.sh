@@ -1,5 +1,12 @@
 #!/bin/bash
 
+showPass () {
+  while IFS= read -r poss
+  do
+    ./"$1" <<< $poss
+  done < "$2"
+}
+
 if [ -f seed/.corrupt ] ; then
   echo 'FIXING CORRUPTIONS' ;
   ./fix.sh ;
@@ -18,12 +25,22 @@ if ! [ -f data/$1.pW ] || ! [ -f data/$1.conf ] ; then
   exit 1 ;
 fi
 
+make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
+
+if [ -f data/$1.solved ] ; then
+  echo 'Well it seems that you already re-solved this one...' ;
+  
+  showPass main data/$1.solved ;
+
+  ./fix.sh ;
+
+  exit ;
+fi
+
 touch seed/.corrupt ;
 
 cp seed/.conf seed/.conf.backup ;
 cp data/$1.conf seed/.conf ;
-
-make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
 
 echo 'I am working ... please wait ...' ;
 
@@ -31,13 +48,12 @@ cd seed ;
 
 ./find < ../data/$1.pW | ./main > .temp ;
 
-while IFS= read -r poss
-do
-	../main <<< $poss
-done < .temp
+showPass ../main .temp ;
 
 cd .. ;
 
+cp seed/.temp data/$1.solved ;
+
 mv seed/.conf.backup seed/.conf ;
 
-rm -f seed/.corrupt seed/.temp main seed/main seed/find seed/get_seed seed/hash ;
+./fix.sh ;
