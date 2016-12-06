@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -f seed/.corrupt ] ; then
+  echo 'FIXING CORRUPTIONS' ;
+  ./fix.sh ;
+  echo '...done' ;
+fi
+
 if [ ! -d "data" ] ; then
   mkdir data ;
 fi
@@ -9,6 +15,8 @@ if [ "$1" = "" ] ; then
 
   exit 1 ;
 fi
+
+touch seed/.corrupt ;
 
 make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
 
@@ -27,4 +35,4 @@ cp .conf ../data/$1.conf
 
 cd .. ;
 
-rm seed/.secret main seed/main seed/find seed/get_seed seed/hash ;
+rm -f seed/.corrupt seed/.secret main seed/main seed/find seed/get_seed seed/hash ;

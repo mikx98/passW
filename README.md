@@ -32,10 +32,6 @@ run to re-solve the actual password (named as 'fb'). this is a long journey,
 so be patient please - without modifications to the
 .conf file it usually **lasts ~30 minutes**
 
-### ./fix.sh
-fixes corrupted files and removes unnecessary ones. run after
-termination of the above scripts
-
 ### seed/.conf
 usually it's safe to leave as is, if you want to adjust
 the time it lasts to re-solve the pass, modify the
