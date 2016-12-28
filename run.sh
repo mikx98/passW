@@ -25,18 +25,18 @@ rm -f data/$1.solved ;
 
 touch seed/.corrupt ;
 
-make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
+make main ; make seed/main ;
 
 cd seed ;
 
 echo 'Enter some random big number: ' ;
 
-./get_seed > .secret ;
+python3 get_seed.py > .secret ;
 
 echo 'Please change your password (' $1 ') to this: ' ;
 ./../main < .secret ;
 
-./hash < .secret | ./main > ../data/$1.pW ;
+python3 hash.py < .secret | ./main > ../data/$1.pW ;
 cp .conf ../data/$1.conf
 
 cd .. ;

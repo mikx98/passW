@@ -25,7 +25,7 @@ if ! [ -f data/$1.pW ] || ! [ -f data/$1.conf ] ; then
   exit 1 ;
 fi
 
-make main ; make seed/hash ; make seed/find ; make seed/get_seed ; make seed/main
+make main ; make seed/main ;
 
 if [ -f data/$1.solved ] ; then
   echo 'Well it seems that you already re-solved this one...' ;
@@ -46,7 +46,7 @@ echo 'I am working ... please wait ...' ;
 
 cd seed ;
 
-./find < ../data/$1.pW | ./main > .temp ;
+python3 find.py < ../data/$1.pW | ./main > .temp ;
 
 showPass ../main .temp ;
 
