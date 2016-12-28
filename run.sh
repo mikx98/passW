@@ -41,4 +41,4 @@ cp .conf ../data/$1.conf
 
 cd .. ;
 
-rm -f seed/.corrupt seed/.secret main seed/main seed/find seed/get_seed seed/hash ;
+./fix.sh
